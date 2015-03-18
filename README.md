@@ -11,3 +11,21 @@ FHIRbase is an open source relational storage for
 To install Simple .NET wrappers for FHIRbase, run the following command in the Package Manager Console:
 
 	PM> Install-Package Fhirbase.Net -Pre
+
+
+Example:
+
+	var patient = new Patient();
+        patient.Name.Add(HumanName.ForFamily("Hello").WithGiven("World"));
+        patient.Telecom.Add(new ContactPoint
+        {
+                System = ContactPoint.ContactPointSystem.Phone, 
+                Use = ContactPoint.ContactPointUse.Mobile,
+                Value = "123456789"
+        });
+
+        var createdPatient = (Patient)FHIRbase.Create(patient);
+
+	...
+
+	FHIRbase.Delete(createdPatient);
