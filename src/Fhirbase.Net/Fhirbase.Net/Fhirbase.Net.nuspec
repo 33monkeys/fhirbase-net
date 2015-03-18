@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>FHIRbase.Net</id>
+    <version>1.0.2-alpha</version>
+    <title>Simple .NET wrappers for FHIRbase</title>
+    <authors>Anton Lisney</authors>
+    <owners>Anton Lisney</owners>
+    <licenseUrl>https://github.com/lisney/fhirbase-net/blob/develop/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/lisney/fhirbase-net</projectUrl>
+    <iconUrl>https://avatars1.githubusercontent.com/u/6482975</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple .NET wrappers for Fhirbase</description>
+    <releaseNotes>Just Fhirbase API interface</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>fhir hl7 postgress fhirbase</tags>
+  </metadata>
+</package>
