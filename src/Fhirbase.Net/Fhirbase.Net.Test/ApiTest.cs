@@ -31,6 +31,7 @@ namespace Fhirbase.Net.Test
             var createdPatient = (Patient)FHIRbase.Create(patient);
 
             Assert.That(createdPatient, Is.Not.Null);
+            Assert.That(createdPatient.Id, Is.Not.Null.Or.Empty);
             Assert.That(createdPatient.HasVersionId, Is.True);
             Assert.That(createdPatient.Name.First().Family.First(), Is.EqualTo("Hello"));
             Assert.That(createdPatient.Name.First().Given.First(), Is.EqualTo("World"));

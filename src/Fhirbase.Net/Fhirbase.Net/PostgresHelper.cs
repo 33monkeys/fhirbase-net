@@ -15,8 +15,7 @@ namespace Fhirbase.Net
     {
         public static object Func(string funcName, params NpgsqlParameter[] parameters)
         {
-            var fhirbaseConnection = ConfigurationManager.ConnectionStrings["FhirbaseConnection"].ConnectionString;
-            var conn = new NpgsqlConnection(fhirbaseConnection);
+            var conn = new NpgsqlConnection(GetFHIRbaseConnectionString());
             conn.Open();
 
             try
@@ -36,6 +35,14 @@ namespace Fhirbase.Net
             {
                 conn.Close();
             }
+        }
+
+        private static string GetFHIRbaseConnectionString()
+        {
+            if (ConfigurationManager.ConnectionStrings["FhirbaseConnection"] == null)
+                throw new FHIRbaseException("Add \"FhirbaseConnection\" connection string in app.config or web.config");
+
+            return ConfigurationManager.ConnectionStrings["FhirbaseConnection"].ConnectionString;
         }
 
         public static NpgsqlParameter Text(string text)
