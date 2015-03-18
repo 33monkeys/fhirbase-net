@@ -10,6 +10,7 @@ namespace Fhirbase.Net
     /// <summary>
     /// Fhirbase RESTful+ API
     /// </summary>
+    /// <exception cref="FHIRbaseException"></exception>
     public interface IFHIRbase
     {
         #region CRUD
