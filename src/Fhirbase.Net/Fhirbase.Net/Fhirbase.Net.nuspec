@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Fhirbase.Net</id>
+    <id>FHIRbase.Net</id>
     <version>1.0.1-alpha</version>
-    <title>Simple .NET wrapper for Fhirbase</title>
+    <title>Simple .NET wrappers for FHIRbase</title>
     <authors>Anton Lisney</authors>
     <owners>Anton Lisney</owners>
     <licenseUrl>https://github.com/lisney/fhirbase-net/blob/develop/LICENSE</licenseUrl>

@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFhirbaseApi.cs" />
+    <Compile Include="IFHIRbase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceKey.cs" />
   </ItemGroup>
