@@ -33,6 +33,9 @@
     <Reference Include="Hl7.Fhir.Core">
       <HintPath>..\packages\Hl7.Fhir.DSTU2.0.20.2-alpha3\lib\net45\Hl7.Fhir.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Monads.NET">
+      <HintPath>..\packages\Monads.NET.1.0.3\lib\net40\Monads.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Npgsql.2.2.5\lib\net45\Mono.Security.dll</HintPath>
@@ -54,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FHIRbaseApi.cs" />
     <Compile Include="FHIRbase.cs" />
     <Compile Include="PostgresHelper.cs" />
     <Compile Include="FHIRbaseException.cs" />
