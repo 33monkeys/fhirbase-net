@@ -13,6 +13,23 @@ namespace Fhirbase.Net
     /// <exception cref="FHIRbaseException"></exception>
     public interface IFHIRbase
     {
+        #region Generation
+
+        /// <summary>
+        /// Generate tables for resources
+        /// </summary>
+        /// <param name="resources"></param>
+        /// <returns></returns>
+        string GenerateTables(params string[] resources);
+
+        /// <summary>
+        /// Generate tables for DSTU2 resources
+        /// </summary>
+        /// <returns></returns>
+        string GenerateTables();
+
+        #endregion
+
         #region CRUD
 
         /// <summary>
@@ -49,6 +66,10 @@ namespace Fhirbase.Net
         /// <param name="key">[type] [id] or [type]</param>
         /// <returns></returns>
         Bundle History(ResourceKey key);
+
+        Bundle History(string resource);
+
+        Bundle History();
 
         /// <summary>
         /// Create a new resource with a server assigned id
@@ -88,23 +109,19 @@ namespace Fhirbase.Net
         /// <returns></returns>
         Bundle Search(string resource, IEnumerable<Tuple<string, string>> parameters);
 
-        #endregion
-
-        #region History
-
-        //TODO: Retrieve the update history for a particular resource type
-
-        #endregion
-
-        #region Validation
-
-        //TODO: Check that the content would be acceptable as an update
 
         #endregion
 
         #region Conformance
 
-        //TODO: Get a conformance statement for the system
+        /// <summary>
+        /// Create FHIR-conformance
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns>JSON with conformance</returns>
+        string Conformance(string cfg = "{}");
+
+        Resource StructureDefinition(string resourceName, string cfg = "{}");
 
         #endregion
 
@@ -116,6 +133,28 @@ namespace Fhirbase.Net
         /// <param name="bundle"></param>
         /// <returns></returns>
         Bundle Transaction(Bundle bundle);
+
+        #endregion
+
+        #region Indexing
+
+        string IndexSearchParam(string resource, string name);
+
+        string DropIndexSearchParams(string resource, string name);
+
+        string[] IndexResource(string resource);
+
+        long DropResourceIndexes(string resource);
+
+        string[] IndexAllResources();
+
+        long DropAllResourceIndexes();
+
+        #endregion
+
+        #region Admin Disk Functions
+
+        string AdminDiskUsageTop(int limit);
 
         #endregion
     }

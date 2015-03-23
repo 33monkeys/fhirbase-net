@@ -33,6 +33,11 @@ namespace Fhirbase.Net
                 .Cast<bool>();
         }
 
+        public Bundle History()
+        {
+            throw new NotImplementedException();
+        }
+
         public Resource Create(Resource entry)
         {
             var resourceJson = FHIRbaseHelper.FhirResourceToJson(entry);
@@ -59,6 +64,25 @@ namespace Fhirbase.Net
                 .Cast<string>();
 
             return FHIRbaseHelper.JsonToFhirResource(deletedResponse);
+        }
+
+        /// <summary>
+        /// Generate tables for resources
+        /// </summary>
+        /// <param name="resources"></param>
+        /// <returns></returns>
+        public string GenerateTables(params string[] resources)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Generate tables for DSTU2 resources
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateTables()
+        {
+            throw new NotImplementedException();
         }
 
         public Resource Read(ResourceKey key)
@@ -101,6 +125,11 @@ namespace Fhirbase.Net
             return FHIRbaseHelper.JsonToBundle(historyResponse);
         }
 
+        public Bundle History(string resource)
+        {
+            throw new NotImplementedException();
+        }
+
         public Resource ReadLastVersion(ResourceKey key)
         {
             var lastVersion = History(key)
@@ -124,6 +153,21 @@ namespace Fhirbase.Net
             return FHIRbaseHelper.JsonToBundle(searchResult);
         }
 
+        /// <summary>
+        /// Create FHIR-conformance
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns>JSON with conformance</returns>
+        public string Conformance(string cfg = "{}")
+        {
+            throw new NotImplementedException();
+        }
+
+        public Resource StructureDefinition(string resourceName, string cfg = "{}")
+        {
+            throw new NotImplementedException();
+        }
+
         public Bundle Transaction(Bundle bundle)
         {
             var transactionJson = FHIRbaseHelper.FhirResourceToJson(bundle);
@@ -132,6 +176,41 @@ namespace Fhirbase.Net
                 .Cast<string>();
 
             return FHIRbaseHelper.JsonToBundle(fhirbaseResult);
+        }
+
+        public string IndexSearchParam(string resource, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string DropIndexSearchParams(string resource, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] IndexResource(string resource)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long DropResourceIndexes(string resource)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] IndexAllResources()
+        {
+            throw new NotImplementedException();
+        }
+
+        public long DropAllResourceIndexes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string AdminDiskUsageTop(int limit)
+        {
+            throw new NotImplementedException();
         }
     }
 }
