@@ -67,8 +67,11 @@
     <Compile Include="ResourceKey.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Fhirbase.Net.nuspec" />
+    <None Include="Fhirbase.Net.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="update-nuget.bat" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

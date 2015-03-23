@@ -23,7 +23,7 @@ namespace Fhirbase.Net
             }
             catch (Exception inner)
             {
-                throw new InvalidOperationException("Cannot parse Fhirbase's json into a feed entry: ", inner);
+                throw new FHIRbaseException("Cannot parse Fhirbase's json into a feed entry: ", inner);
             }
         }
 

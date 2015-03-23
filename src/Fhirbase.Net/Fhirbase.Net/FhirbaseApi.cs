@@ -103,7 +103,14 @@ namespace Fhirbase.Net
 
         public Resource ReadLastVersion(ResourceKey key)
         {
-            throw new NotImplementedException();
+            var lastVersion = History(key)
+                .With(x => x.Entry)
+                .Select(x => x.Resource)
+                .Where(x => x.HasVersionId)
+                .OrderBy(x => x.Meta.LastUpdated)
+                .LastOrDefault();
+
+            return lastVersion;
         }
 
         public Bundle Search(string resource, IEnumerable<Tuple<string, string>> parameters)
