@@ -95,6 +95,13 @@ namespace Fhirbase.Net
 
         bool IsDeleted(ResourceKey key);
 
+        /// <summary>
+        /// Check resource is latest version
+        /// </summary>
+        /// <param name="key">[type] [id] [vid]</param>
+        /// <returns></returns>
+        bool IsLatest(ResourceKey key);
+
         Resource ReadLastVersion(ResourceKey key);
 
         #endregion
@@ -118,10 +125,10 @@ namespace Fhirbase.Net
         /// Create FHIR-conformance
         /// </summary>
         /// <param name="cfg"></param>
-        /// <returns>JSON with conformance</returns>
-        string Conformance(string cfg = "{}");
+        /// <returns>Conformance</returns>
+        Conformance Conformance(string cfg = "{}");
 
-        Resource StructureDefinition(string resourceName, string cfg = "{}");
+        StructureDefinition StructureDefinition(string resourceName, string cfg = "{}");
 
         #endregion
 
@@ -140,7 +147,7 @@ namespace Fhirbase.Net
 
         string IndexSearchParam(string resource, string name);
 
-        string DropIndexSearchParams(string resource, string name);
+        long DropIndexSearchParams(string resource, string name);
 
         string[] IndexResource(string resource);
 

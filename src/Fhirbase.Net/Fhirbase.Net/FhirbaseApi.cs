@@ -33,11 +33,6 @@ namespace Fhirbase.Net
                 .Cast<bool>();
         }
 
-        public Bundle History()
-        {
-            throw new NotImplementedException();
-        }
-
         public Resource Create(Resource entry)
         {
             var resourceJson = FHIRbaseHelper.FhirResourceToJson(entry);
@@ -54,6 +49,17 @@ namespace Fhirbase.Net
                 .WithText(key.TypeName)
                 .WithText(key.ResourceId)
                 .Cast<bool>();
+        }
+
+        public bool IsLatest(ResourceKey key)
+        {
+            var result = FHIRbase.Call("fhir.is_latest")
+               .WithText(key.TypeName)
+               .WithText(key.ResourceId)
+               .WithText(key.VersionId)
+               .Cast<bool>();
+
+            return result;
         }
 
         public Resource Delete(ResourceKey key)
@@ -73,7 +79,11 @@ namespace Fhirbase.Net
         /// <returns></returns>
         public string GenerateTables(params string[] resources)
         {
-            throw new NotImplementedException();
+            var result = FHIRbase.Call("fhir.generate_tables")
+                .WithTextArray(resources)
+                .Cast<string>();
+
+            return result;
         }
 
         /// <summary>
@@ -82,7 +92,10 @@ namespace Fhirbase.Net
         /// <returns></returns>
         public string GenerateTables()
         {
-            throw new NotImplementedException();
+            var result = FHIRbase.Call("fhir.generate_tables")
+                .Cast<string>();
+
+            return result;
         }
 
         public Resource Read(ResourceKey key)
@@ -115,6 +128,11 @@ namespace Fhirbase.Net
             return FHIRbaseHelper.JsonToFhirResource(updateResponse);
         }
 
+        /// <summary>
+        /// Retrieve the update history for a particular resource
+        /// </summary>
+        /// <param name="key">[type] [id] or [type]</param>
+        /// <returns></returns>
         public Bundle History(ResourceKey key)
         {
             var historyResponse = FHIRbase.Call("fhir.history")
@@ -126,6 +144,11 @@ namespace Fhirbase.Net
         }
 
         public Bundle History(string resource)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bundle History()
         {
             throw new NotImplementedException();
         }
@@ -158,14 +181,23 @@ namespace Fhirbase.Net
         /// </summary>
         /// <param name="cfg"></param>
         /// <returns>JSON with conformance</returns>
-        public string Conformance(string cfg = "{}")
+        public Conformance Conformance(string cfg = "{}")
         {
-            throw new NotImplementedException();
+            var conformanceResult = FHIRbase.Call("fhir.conformance")
+                .WithJsonb(cfg)
+                .Cast<string>();
+
+            return (Conformance)FHIRbaseHelper.JsonToFhirResource(conformanceResult);
         }
 
-        public Resource StructureDefinition(string resourceName, string cfg = "{}")
+        public StructureDefinition StructureDefinition(string resourceName, string cfg = "{}")
         {
-            throw new NotImplementedException();
+            var sdResult = FHIRbase.Call("fhir.structuredefinition")
+                .WithJsonb(cfg)
+                .WithText(resourceName)
+                .Cast<string>();
+
+            return (StructureDefinition)FHIRbaseHelper.JsonToFhirResource(sdResult);
         }
 
         public Bundle Transaction(Bundle bundle)
@@ -180,37 +212,65 @@ namespace Fhirbase.Net
 
         public string IndexSearchParam(string resource, string name)
         {
-            throw new NotImplementedException();
+            var indexSearchParamsResult = FHIRbase.Call("fhir.index_search_param")
+                .WithText(resource)
+                .WithText(name)
+                .Cast<string>();
+
+            return indexSearchParamsResult;
         }
 
-        public string DropIndexSearchParams(string resource, string name)
+        public long DropIndexSearchParams(string resource, string name)
         {
-            throw new NotImplementedException();
+            var dropIndexSearchParamsResult = FHIRbase.Call("fhir.drop_index_search_param")
+                .WithText(resource)
+                .WithText(name)
+                .Cast<long>();
+
+            return dropIndexSearchParamsResult;
         }
 
         public string[] IndexResource(string resource)
         {
-            throw new NotImplementedException();
+            var indexResiurceResult = FHIRbase.Call("fhir.index_resource")
+                .WithText(resource)
+                .Cast<string[]>();
+
+            return indexResiurceResult;
         }
 
         public long DropResourceIndexes(string resource)
         {
-            throw new NotImplementedException();
+            var dropResourceIndexesResult = FHIRbase.Call("fhir.drop_resource_indexes")
+                .WithText(resource)
+                .Cast<long>();
+
+            return dropResourceIndexesResult;
         }
 
         public string[] IndexAllResources()
         {
-            throw new NotImplementedException();
+            var indexAllResourcesResult = FHIRbase.Call("fhir.index_all_resources")
+                .Cast<string[]>();
+
+            return indexAllResourcesResult;
         }
 
         public long DropAllResourceIndexes()
         {
-            throw new NotImplementedException();
+            var dropAllResourceIndexesResult = FHIRbase.Call("fhir.drop_all_resource_indexes")
+                .Cast<long>();
+
+            return dropAllResourceIndexesResult;
         }
 
         public string AdminDiskUsageTop(int limit)
         {
-            throw new NotImplementedException();
+            var adminDiskUsageTopResult = FHIRbase.Call("fhir.admin_disk_usage_top")
+                .WithInt(limit)
+                .Cast<string>();
+
+            return adminDiskUsageTopResult;
         }
     }
 }

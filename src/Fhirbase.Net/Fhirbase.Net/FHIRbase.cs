@@ -43,6 +43,18 @@ namespace Fhirbase.Net
             return func;
         }
 
+        public static FHIRbaseFunc WithTextArray(this FHIRbaseFunc func, string[] resources)
+        {
+            func.Parameters.Add(PostgresHelper.TextArray(resources));
+            return func;
+        }
+
+        public static FHIRbaseFunc WithInt(this FHIRbaseFunc func, int limit)
+        {
+            func.Parameters.Add(PostgresHelper.Int(limit));
+            return func;
+        }
+
         /// <summary>
         /// Call FHIRbase function and cast value
         /// </summary>

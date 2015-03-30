@@ -62,5 +62,23 @@ namespace Fhirbase.Net
                 Value = text,
             };
         }
+
+        public static NpgsqlParameter TextArray(string[] resources)
+        {
+            return new NpgsqlParameter
+            {
+                NpgsqlDbType = NpgsqlDbType.Array,
+                Value = resources,
+            };
+        }
+
+        public static NpgsqlParameter Int(int limit)
+        {
+            return new NpgsqlParameter
+            {
+                NpgsqlDbType = NpgsqlDbType.Integer,
+                Value = limit,
+            };
+        }
     }
 }
