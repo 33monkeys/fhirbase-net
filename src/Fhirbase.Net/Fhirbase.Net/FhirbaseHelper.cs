@@ -8,7 +8,7 @@ using Hl7.Fhir.Serialization;
 
 namespace Fhirbase.Net
 {
-    public class FHIRbaseHelper
+    public static class FHIRbaseHelper
     {
         public static string FhirResourceToJson(Resource entry)
         {
@@ -41,5 +41,7 @@ namespace Fhirbase.Net
 
             return sb.ToString();
         }
+
+        //public static 
     }
 }

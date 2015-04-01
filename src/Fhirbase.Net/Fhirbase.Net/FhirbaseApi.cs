@@ -165,7 +165,7 @@ namespace Fhirbase.Net
             return lastVersion;
         }
 
-        public Bundle Search(string resource, IEnumerable<Tuple<string, string>> parameters)
+        public Bundle Search(string resource, params Tuple<string, string>[] parameters)
         {
             var searchQuery = FHIRbaseHelper.FormatSearchString(parameters);
             var searchResult = FHIRbase.Call("fhir.search")

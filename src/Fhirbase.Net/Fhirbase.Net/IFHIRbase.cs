@@ -114,7 +114,7 @@ namespace Fhirbase.Net
         /// <param name="resource">Resource Type</param>
         /// <param name="parameters">Name-value set</param>
         /// <returns></returns>
-        Bundle Search(string resource, IEnumerable<Tuple<string, string>> parameters);
+        Bundle Search(string resource, params Tuple<string, string>[] parameters);
 
 
         #endregion
