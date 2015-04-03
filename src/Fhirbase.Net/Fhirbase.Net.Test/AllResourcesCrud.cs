@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hl7.Fhir.Serialization;
 using NUnit.Framework;
-using System.IO.Compression;
 using System.Runtime.InteropServices;
 using Hl7.Fhir.Model;
 using Monads.NET;
@@ -76,53 +72,6 @@ namespace Fhirbase.Net.Test
             Assert.That(FHIRbase.IsDeleted(createdResource), Is.True);
             Assert.That(FHIRbase.IsDeleted(readedResource), Is.True);
             Assert.That(FHIRbase.IsDeleted(updatedResource), Is.True);
-        }
-    }
-
-    internal class ResourceTestHelper
-    {
-        public static void ClearExtractPath(string extractPath)
-        {
-            if (Directory.Exists(extractPath))
-                foreach (var file in Directory.EnumerateFiles(extractPath))
-                    File.Delete(file);
-        }
-
-        public static void UnzipExamples(string zipPath, string extractPath)
-        {
-            if (!Directory.Exists(extractPath))
-                Directory.CreateDirectory(extractPath);
-
-            using (var archive = ZipFile.OpenRead(zipPath))
-            {
-                foreach (var entry in archive.Entries
-                    .Where(entry => entry.FullName.Contains("example.json") /*|| entry.FullName.Contains("example-")*/))
-                {
-                    entry.ExtractToFile(Path.Combine(extractPath, entry.FullName));
-                }
-            }
-        }
-
-        public static List<Resource> LoadExamples(string extractPath)
-        {
-            var result = Directory.EnumerateFiles(extractPath)
-                .Select(File.ReadAllText)
-                .Select(resourceJson =>
-                {
-                    try
-                    {
-                        return FhirParser.ParseFromJson(resourceJson);
-                    }
-                    catch (Exception)
-                    {
-                        return null;
-                    }
-                })
-                .Where(x => x != null)
-                .Cast<Resource>()
-                .ToList();
-
-            return result;
         }
     }
 }
