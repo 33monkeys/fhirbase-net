@@ -72,13 +72,26 @@ namespace Fhirbase.Net.Api
         /// <summary>
         /// Retrieve the update history for a particular resource
         /// </summary>
-        /// <param name="key">[type] [id] or [type]</param>
+        /// <param name="parameters">count and/or since</param>
         /// <returns></returns>
-        Bundle History(ResourceKey key);
+        Bundle History(HistoryParameters parameters = null);
 
-        Bundle History(string resource);
+        /// <summary>
+        /// Retrieve the update history for a particular resource
+        /// </summary>
+        /// <param name="resourceType"></param>
+        /// <param name="parameters">count and/or since</param>
+        /// <returns></returns>
+        Bundle History(string resourceType, HistoryParameters parameters = null);
 
-        Bundle History();
+        /// <summary>
+        /// Retrieve the update history for a particular resource
+        /// </summary>
+        /// <param name="resourceType"></param>
+        /// <param name="resourceId"></param>
+        /// <param name="parameters">count and/or since</param>
+        /// <returns></returns>
+        Bundle History(string resourceType, string resourceId, HistoryParameters parameters = null);
 
         #endregion
 

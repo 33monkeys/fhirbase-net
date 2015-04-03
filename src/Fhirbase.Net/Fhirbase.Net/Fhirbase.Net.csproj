@@ -68,6 +68,7 @@
     <Compile Include="Api\IFHIRbase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ResourceKey.cs" />
+    <Compile Include="SearchHelpers\HistoryParameters.cs" />
     <Compile Include="SearchHelpers\SearchParameters.cs" />
   </ItemGroup>
   <ItemGroup>

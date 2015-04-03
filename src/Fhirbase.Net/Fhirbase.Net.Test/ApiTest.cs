@@ -100,7 +100,7 @@ namespace Fhirbase.Net.Test
             var updatedPatient1 = (Patient) FHIRbase.Update(createdPatient);
             var updatedPatient2 = (Patient)FHIRbase.Update(updatedPatient1);
 
-            var history = FHIRbase.History(createdPatient);
+            var history = FHIRbase.History(createdPatient.TypeName, createdPatient.Id);
             
             Assert.That(history, Is.Not.Null);
             Assert.That(history.Entry, Is.Not.Null);

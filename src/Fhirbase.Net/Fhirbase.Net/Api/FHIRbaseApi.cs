@@ -128,31 +128,52 @@ namespace Fhirbase.Net.Api
         /// <summary>
         /// Retrieve the update history for a particular resource
         /// </summary>
-        /// <param name="key">[type] [id] or [type]</param>
+        /// <param name="resourceType"></param>
+        /// <param name="resourceId"></param>
+        /// <param name="parameters"></param>
         /// <returns></returns>
-        public Bundle History(ResourceKey key)
+        public Bundle History(string resourceType, string resourceId, HistoryParameters parameters = null)
         {
+            if (parameters == null)
+                parameters = new HistoryParameters();
+
             var historyResponse = FHIRbase.Call("fhir.history")
-                .WithText(key.TypeName)
-                .WithText(key.ResourceId)
+                .WithText(resourceType)
+                .WithText(resourceId)
+                .WithText(parameters.ToString())
                 .Cast<string>();
 
             return FHIRbaseHelper.JsonToBundle(historyResponse);
         }
 
-        public Bundle History(string resource)
+        public Bundle History(string resourceType, HistoryParameters parameters = null)
         {
-            throw new NotImplementedException();
+            if (parameters == null)
+                parameters = new HistoryParameters();
+
+            var historyResponse = FHIRbase.Call("fhir.history")
+                .WithText(resourceType)
+                .WithText(parameters.ToString())
+                .Cast<string>();
+
+            return FHIRbaseHelper.JsonToBundle(historyResponse);
         }
 
-        public Bundle History()
+        public Bundle History(HistoryParameters parameters = null)
         {
-            throw new NotImplementedException();
+            if (parameters == null)
+                parameters = new HistoryParameters();
+
+            var historyResponse = FHIRbase.Call("fhir.history")
+                .WithText(parameters.ToString())
+                .Cast<string>();
+
+            return FHIRbaseHelper.JsonToBundle(historyResponse);
         }
 
         public Resource ReadLastVersion(ResourceKey key)
         {
-            var lastVersion = History(key)
+            var lastVersion = History(key.TypeName, key.ResourceId)
                 .With(x => x.Entry)
                 .Select(x => x.Resource)
                 .Where(x => x.HasVersionId)
@@ -164,6 +185,9 @@ namespace Fhirbase.Net.Api
 
         public Bundle Search(string resource, SearchParameters parameters)
         {
+            if (parameters == null)
+                parameters = new SearchParameters();
+
             var searchQuery = parameters.ToString();
             var searchResult = FHIRbase.Call("fhir.search")
                 .WithText(resource)
