@@ -1,6 +1,6 @@
 using Hl7.Fhir.Model;
 
-namespace Fhirbase.Net
+namespace Fhirbase.Net.Common
 {
     public class ResourceKey
     {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Fhirbase.Net.Common;
+using Fhirbase.Net.SearchHelpers;
 using Hl7.Fhir.Model;
 
-namespace Fhirbase.Net
+namespace Fhirbase.Net.Api
 {
     /// <summary>
     /// Fhirbase RESTful+ API
@@ -61,6 +59,17 @@ namespace Fhirbase.Net
         Resource Delete(ResourceKey key);
 
         /// <summary>
+        /// Create a new resource with a server assigned id
+        /// </summary>
+        /// <param name="resource">[type]</param>
+        /// <returns></returns>
+        Resource Create(Resource resource);
+        
+        #endregion
+
+        #region History
+
+        /// <summary>
         /// Retrieve the update history for a particular resource
         /// </summary>
         /// <param name="key">[type] [id] or [type]</param>
@@ -71,13 +80,6 @@ namespace Fhirbase.Net
 
         Bundle History();
 
-        /// <summary>
-        /// Create a new resource with a server assigned id
-        /// </summary>
-        /// <param name="resource">[type]</param>
-        /// <returns></returns>
-        Resource Create(Resource resource);
-        
         #endregion
 
         #region Resource Utility
@@ -114,7 +116,7 @@ namespace Fhirbase.Net
         /// <param name="resource">Resource Type</param>
         /// <param name="parameters">Name-value set</param>
         /// <returns></returns>
-        Bundle Search(string resource, params Tuple<string, string>[] parameters);
+        Bundle Search(string resource, SearchParameters parameters = null);
 
 
         #endregion

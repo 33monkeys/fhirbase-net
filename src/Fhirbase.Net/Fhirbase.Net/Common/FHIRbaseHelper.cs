@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 
-namespace Fhirbase.Net
+namespace Fhirbase.Net.Common
 {
     public static class FHIRbaseHelper
     {

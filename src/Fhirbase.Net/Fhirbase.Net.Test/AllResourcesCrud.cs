@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Runtime.InteropServices;
+using Fhirbase.Net.Api;
+using Fhirbase.Net.Common;
 using Hl7.Fhir.Model;
 using Monads.NET;
 

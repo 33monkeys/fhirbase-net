@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Fhirbase.Net.Api;
+using Fhirbase.Net.SearchHelpers;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using Hl7.Fhir.Serialization;
@@ -41,15 +43,17 @@ namespace Fhirbase.Net.Test
             foreach (var entryComponent in RemovedPatient.Entry)
                 FHIRbase.Delete(entryComponent.Resource);
 
-            SearchPatients = new List<Patient>();
-            SearchPatients.Add((Patient)FHIRbase.Create(SimplePatient));
-            SearchPatients.Add((Patient)FHIRbase.Create(SimplePatient));
-            SearchPatients.Add((Patient)FHIRbase.Create(SimplePatient));
+            SearchPatients = new List<Patient>
+            {
+                (Patient) FHIRbase.Create(SimplePatient),
+                (Patient) FHIRbase.Create(SimplePatient),
+                (Patient) FHIRbase.Create(SimplePatient),
+                (Patient) FHIRbase.Create(CommonPatient),
+                (Patient) FHIRbase.Create(CommonPatient),
+                (Patient) FHIRbase.Create(CommonPatient),
+                (Patient) FHIRbase.Create(CommonPatient)
+            };
 
-            SearchPatients.Add((Patient)FHIRbase.Create(CommonPatient));
-            SearchPatients.Add((Patient)FHIRbase.Create(CommonPatient));
-            SearchPatients.Add((Patient)FHIRbase.Create(CommonPatient));
-            SearchPatients.Add((Patient)FHIRbase.Create(CommonPatient));
         }
 
         [TestFixtureTearDown]
@@ -116,12 +120,12 @@ namespace Fhirbase.Net.Test
         [Test]
         public void Test_Search()
         {
-            var search1 = FHIRbase.Search("Patient", new Tuple<string, string>("family", "Hello"));
+            var search1 = FHIRbase.Search("Patient", Search.By("family", "Hello"));
             
             Assert.That(search1.Entry, Is.Not.Null);
             Assert.That(search1.Entry.Count, Is.EqualTo(3));
 
-            var search2 = FHIRbase.Search("Patient", new Tuple<string, string>("identifier.value", "12345"));
+            var search2 = FHIRbase.Search("Patient", Search.By("identifier.value", "12345"));
 
             Assert.That(search2.Entry, Is.Not.Null);
             Assert.That(search2.Entry.Count, Is.EqualTo(7));

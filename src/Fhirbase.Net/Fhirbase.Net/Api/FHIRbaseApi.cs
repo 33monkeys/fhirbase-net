@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using Fhirbase.Net.Common;
+using Fhirbase.Net.SearchHelpers;
 using Hl7.Fhir.Model;
 using Monads.NET;
 
-namespace Fhirbase.Net
+namespace Fhirbase.Net.Api
 {
     public class FHIRbaseApi : IFHIRbase
     {
@@ -165,9 +162,9 @@ namespace Fhirbase.Net
             return lastVersion;
         }
 
-        public Bundle Search(string resource, params Tuple<string, string>[] parameters)
+        public Bundle Search(string resource, SearchParameters parameters)
         {
-            var searchQuery = FHIRbaseHelper.FormatSearchString(parameters);
+            var searchQuery = parameters.ToString();
             var searchResult = FHIRbase.Call("fhir.search")
                 .WithText(resource)
                 .WithText(searchQuery)
